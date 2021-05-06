@@ -13,7 +13,7 @@ def weight_decay(args, model):
     penalty = 0
     for p in model.parameters():
         if p.requires_grad:
-            penalty += args.penalty * args.weight_decay * torch.norm(p) ** 2
+            penalty += 0.5 * args.weight_decay * torch.norm(p) ** 2
 
     return penalty.to(args.device)
 
@@ -91,9 +91,9 @@ def main():
     device = torch.device("cuda:"+str(args.gpu_id) if torch.cuda.is_available() else "cpu")
     args.device = device
 
-    trainloader, _, num_classes = make_dataset(args.dataset, args.data_dir, args.batch_size, args.sample_size)
+    trainloader, _, num_classes = make_dataset(args.dataset, args.data_dir, args.batch_size, args.sample_size,  SOTA=args.SOTA)
 
-    model = models.__dict__[args.model](num_classes=num_classes, fc_bias=args.bias).to(device)
+    model = models.__dict__[args.model](num_classes=num_classes, fc_bias=args.bias, ETF_fc=args.ETF_fc, fixdim=args.fixdim, SOTA=args.SOTA).to(device)
     print('# of model parameters: ' + str(count_network_parameters(model)))
 
     train(args, model, trainloader)

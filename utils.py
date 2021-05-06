@@ -3,8 +3,6 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.optim.lr_scheduler as lrs
 
-from LBFGS import LBFGS
-
 def make_optimizer(args, my_model):
     trainable = filter(lambda x: x.requires_grad, my_model.parameters())
 
@@ -28,12 +26,6 @@ def make_optimizer(args, my_model):
                   'history_size': args.history_size,
                   'line_search_fn': 'strong_wolfe'
         }
-    elif args.optimizer == 'LBFGS-variant':
-        optimizer_function = LBFGS
-        kwargs = {'lr': args.lr,
-                  'history_size': args.history_size,
-                  'line_search': 'Wolfe',
-                  'debug': True}
 
     return optimizer_function(trainable, **kwargs)
 
@@ -108,6 +100,6 @@ def compute_accuracy(output, target, topk=(1,)):
 
     res = []
     for k in topk:
-        correct_k = correct[:k].view(-1).float().sum(0)
+        correct_k = correct[:k].reshape(-1).float().sum(0)
         res.append(correct_k.mul_(100.0 / batch_size))
     return res

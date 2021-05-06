@@ -5,170 +5,334 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
+datasets = ['mnist', 'cifar10']
+print(os.getcwd())
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--path', type=str, default=None)
-args = parser.parse_args()
+# ------------------------ plot for figure 3 mnist ---------------------------------------------------------------------
+# id = 0
+# PATH_TO_INFO = os.path.join(os.getcwd(), 'model_weights/') + datasets[id] + '/'
+# PATH_TO_INFO_SGD = os.path.join(PATH_TO_INFO, 'SGD_info_new.pkl')
+# PATH_TO_INFO_ADAM = os.path.join(PATH_TO_INFO, 'Adam_info_new.pkl')
+# PATH_TO_INFO_LBFGS = os.path.join(PATH_TO_INFO, 'LBFGS_info_new.pkl')
+#
+# out_path = os.path.join(os.path.dirname(PATH_TO_INFO), 'imgs/')
+# if not os.path.exists(out_path):
+#     os.makedirs(out_path, exist_ok=True)
+#
+# with open(PATH_TO_INFO_SGD, 'rb') as f:
+#     info_sgd = pickle.load(f)
+#
+# with open(PATH_TO_INFO_ADAM, 'rb') as f:
+#     info_adam = pickle.load(f)
+#
+# with open(PATH_TO_INFO_LBFGS, 'rb') as f:
+#     info_lbfgs = pickle.load(f)
 
-out_path = args.path + 'imgs/'
+# ------------------------ plot for figure 3 cifar 10 ------------------------------------------------------------------
+# id = 1
+# PATH_TO_INFO = os.path.join(os.getcwd(), 'model_weights/') + datasets[id] + '/'
+# PATH_TO_INFO_SGD = os.path.join(PATH_TO_INFO, 'SGD_info_new.pkl')
+# PATH_TO_INFO_ADAM = os.path.join(PATH_TO_INFO, 'Adam_info_new.pkl')
+# PATH_TO_INFO_LBFGS = os.path.join(PATH_TO_INFO, 'LBFGS_info_new.pkl')
+#
+# out_path = os.path.join(os.path.dirname(PATH_TO_INFO), 'imgs/')
+# if not os.path.exists(out_path):
+#     os.makedirs(out_path, exist_ok=True)
+#
+# with open(PATH_TO_INFO_SGD, 'rb') as f:
+#     info_sgd = pickle.load(f)
+#
+# with open(PATH_TO_INFO_ADAM, 'rb') as f:
+#     info_adam = pickle.load(f)
+#
+# with open(PATH_TO_INFO_LBFGS, 'rb') as f:
+#     info_lbfgs = pickle.load(f)
+
+# ------------------------ plot for figure 6 mnist ---------------------------------------------------------------------
+# id = 0
+# PATH_TO_INFO = os.path.join(os.getcwd(), 'model_weights/') + datasets[id] + '_sota/'
+# PATH_TO_INFO_ETFfc_false_fixdim_false = os.path.join(PATH_TO_INFO, 'ETFfc_'+'false_'+'fixdim_'+'false_'+'info_new.pkl')
+# PATH_TO_INFO_ETFfc_true_fixdim_false = os.path.join(PATH_TO_INFO, 'ETFfc_'+'true_'+'fixdim_'+'false_'+'info_new.pkl')
+# PATH_TO_INFO_ETFfc_false_fixdim_true = os.path.join(PATH_TO_INFO, 'ETFfc_'+'false_'+'fixdim_'+'true_'+'info_new.pkl')
+# PATH_TO_INFO_ETFfc_true_fixdim_true = os.path.join(PATH_TO_INFO, 'ETFfc_'+'true_'+'fixdim_'+'true_'+'info_new.pkl')
+#
+# out_path = os.path.join(os.path.dirname(PATH_TO_INFO), 'imgs/')
+# if not os.path.exists(out_path):
+#     os.makedirs(out_path, exist_ok=True)
+#
+# with open(PATH_TO_INFO_ETFfc_false_fixdim_false, 'rb') as f:
+#     info_ETFfc_false_fixdim_false = pickle.load(f)
+#
+# with open(PATH_TO_INFO_ETFfc_true_fixdim_false, 'rb') as f:
+#     info_ETFfc_true_fixdim_false = pickle.load(f)
+#
+# with open(PATH_TO_INFO_ETFfc_false_fixdim_true, 'rb') as f:
+#     info_ETFfc_false_fixdim_true = pickle.load(f)
+#
+# with open(PATH_TO_INFO_ETFfc_true_fixdim_true, 'rb') as f:
+#     info_ETFfc_true_fixdim_true = pickle.load(f)
+
+# ------------------------ plot for figure 6 cifar 10 ------------------------------------------------------------------
+id = 1
+PATH_TO_INFO = os.path.join(os.getcwd(), 'model_weights/') + datasets[id] + '_sota/'
+PATH_TO_INFO_ETFfc_false_fixdim_false = os.path.join(PATH_TO_INFO, 'ETFfc_'+'false_'+'fixdim_'+'false_'+'info_new.pkl')
+PATH_TO_INFO_ETFfc_true_fixdim_false = os.path.join(PATH_TO_INFO, 'ETFfc_'+'true_'+'fixdim_'+'false_'+'info_new.pkl')
+PATH_TO_INFO_ETFfc_false_fixdim_true = os.path.join(PATH_TO_INFO, 'ETFfc_'+'false_'+'fixdim_'+'true_'+'info_new.pkl')
+PATH_TO_INFO_ETFfc_true_fixdim_true = os.path.join(PATH_TO_INFO, 'ETFfc_'+'true_'+'fixdim_'+'true_'+'info_new.pkl')
+
+out_path = os.path.join(os.path.dirname(PATH_TO_INFO), 'imgs/')
 if not os.path.exists(out_path):
     os.makedirs(out_path, exist_ok=True)
 
-with open(args.path+'info.pkl', 'rb') as f:
-    info = pickle.load(f)
+with open(PATH_TO_INFO_ETFfc_false_fixdim_false, 'rb') as f:
+    info_ETFfc_false_fixdim_false = pickle.load(f)
+
+with open(PATH_TO_INFO_ETFfc_true_fixdim_false, 'rb') as f:
+    info_ETFfc_true_fixdim_false = pickle.load(f)
+
+with open(PATH_TO_INFO_ETFfc_false_fixdim_true, 'rb') as f:
+    info_ETFfc_false_fixdim_true = pickle.load(f)
+#
+with open(PATH_TO_INFO_ETFfc_true_fixdim_true, 'rb') as f:
+    info_ETFfc_true_fixdim_true = pickle.load(f)
+
 
 XTICKS = [0, 50, 100, 150, 200]
-YTICKS = [0, 0.05, 0.1, 0.15]
-AXIS = [0, 210, 0, 0.15]
 
 
-def plot_Sigma_W1(): # NC1_train
+def plot_collapse():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(info['Sigma_W_train_norm'], 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'$\|\|{\bf{\Sigma_W}}\|\|_F$', fontsize=30)
+    plt.grid(True)
+
+    #----------------------------------- plot for figure 3 -------------------------------------------------------------
+    # plt.plot(info_sgd['collapse_metric'], 'r', marker='v', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_adam['collapse_metric'], 'b',  marker='o', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_lbfgs['collapse_metric'], 'g',  marker='s', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+
+    # --------------------------------- plot for figure 6 --------------------------------------------------------------
+    plt.plot(info_ETFfc_false_fixdim_false['collapse_metric'], 'c', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_false['collapse_metric'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_false_fixdim_true['collapse_metric'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_true['collapse_metric'], 'r', marker='X', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel(r'$\mathcal{NC}_1$', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
 
-    fig.savefig(out_path+"Sigma_W_train_norm.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(-0.1, 0.41, 0.1), fontsize=30) # plot for figure 3 mnist
+    # plt.yticks(np.arange(-2, 6.01, 2), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(-0.1, 0.21, 0.1), fontsize=30) # plot for figure 6 mnist
+    plt.yticks(np.arange(0, 12.1, 4), fontsize=30) # plot for figure 6 cifar 10
+
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
+
+    # plt.axis([0, 200, -0.01, 0.4]) # plot for figure 3 mnist
+    # plt.axis([0, 200, -0.2, 6]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, -0.01, 0.2]) # plot for figure 6 mnist
+    plt.axis([0, 200, -0.4, 12]) # plot for figure 6 cifar 10
+
+    fig.savefig(out_path + datasets[id] + "-resnet18-NC1.pdf", bbox_inches='tight')
 
 
-def plot_Sigma_W2(): # NC1_test
+def plot_ETF():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(info['Sigma_W_test_norm'], 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'$\|\|{\bf{\Sigma_W}}\|\|_F$', fontsize=30)
+    plt.grid(True)
+    # ------------------------------------- plot for figure 3 ----------------------------------------------------------
+    # ETF_sgd = info_sgd['ETF_metric']
+    # ETF_adam = info_adam['ETF_metric']
+    # ETF_lbfgs = info_lbfgs['ETF_metric']
+    #
+    # plt.plot(ETF_sgd, 'r', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(ETF_adam, 'b',  marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(ETF_lbfgs, 'g',  marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    # -------------------------------------- plot for figure 6 ---------------------------------------------------------
+    ETF_ETFfc_false_fixdim_false = info_ETFfc_false_fixdim_false['ETF_metric']
+    ETF_ETFfc_true_fixdim_false = info_ETFfc_true_fixdim_false['ETF_metric']
+    ETF_ETFfc_false_fixdim_true = info_ETFfc_false_fixdim_true['ETF_metric']
+    ETF_ETFfc_true_fixdim_true = info_ETFfc_true_fixdim_true['ETF_metric']
+
+    plt.plot(ETF_ETFfc_false_fixdim_false, 'c', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(ETF_ETFfc_true_fixdim_false, 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(ETF_ETFfc_false_fixdim_true, 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(ETF_ETFfc_true_fixdim_true, 'r', marker='X', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel(r'$\mathcal{NC}_2$', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    # plt.axis(AXIS)
 
-    fig.savefig(out_path+"Sigma_W_test_norm.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(-0.2, 0.61, .2), fontsize=30) # plot for figure 3 mnist
+    # plt.yticks(np.arange(0, 0.81, .2), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(-0.2, 0.61, .2), fontsize=30) # plot for figure 6 mnist
+    plt.yticks(np.arange(-0.2, 1.21, .2), fontsize=30) # plot for figure 6 cifar10
+
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
+
+    # plt.axis([0, 200, -0.02, 0.6]) # plot for figure 3 mnist
+    # plt.axis([0, 200, -0.02, 0.8]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, -0.01, 0.6]) # plot for figure 6 mnist
+    plt.axis([0, 200, -0.02, 1.2]) # plot for figure 6 cifar10
+
+    fig.savefig(out_path + datasets[id] + "-resnet18-NC2.pdf", bbox_inches='tight')
 
 
-def plot_b_k_norm():
-    b_list = info['b']
-    b_norm = []
-    for i in range(len(b_list)):
-        b_norm.append(np.sqrt(np.sum(b_list[i]**2)))
-
+def plot_WH_relation():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(b_norm, 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'$\|\|{\bf{b}}_k\|\|_2$', fontsize=30)
+    plt.grid(True)
+
+    # ------------------------------------- plot for figure 3 ----------------------------------------------------------
+    # plt.plot(info_sgd['WH_relation_metric'], 'r', marker='v', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_adam['WH_relation_metric'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_lbfgs['WH_relation_metric'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    # ------------------------------------- plot for figure 6 ----------------------------------------------------------
+    plt.plot(info_ETFfc_false_fixdim_false['WH_relation_metric'], 'c', marker='v', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_false['WH_relation_metric'], 'b', marker='o', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_false_fixdim_true['WH_relation_metric'], 'g', marker='s', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_true['WH_relation_metric'], 'r', marker='X', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel(r'$\mathcal{NC}_3$', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
 
-    fig.savefig(out_path + "bias_norm.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(0, 0.61, 0.2), fontsize=30) # plot for figure 3 mnist
+    # plt.yticks(np.arange(0, 1.01, 0.2), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(0, 0.61, 0.2), fontsize=30) # plot for figure 6 mnist
+    plt.yticks(np.arange(0, 1.21, 0.2), fontsize=30) # plot for figure 6 cifar10
+
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
+
+    # plt.axis([0, 200, 0, 0.6]) # plot for figure 3 mnist
+    # plt.axis([0, 200, 0, 1]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, 0, 0.6]) # plot for figure 6 mnist
+    plt.axis([0, 200, 0, 1.2]) # plot for figure 6 cifar10
+
+    fig.savefig(out_path + datasets[id] + "-resnet18-NC3.pdf", bbox_inches='tight')
 
 
-def plot_b_k_variance():
-    b_list = info['b']
-    b_norm = []
-    for i in range(len(b_list)):
-        b_norm.append(np.std(b_list[i]))
-
+def plot_residual():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(b_norm, 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'${\rm{Std}}({\bf{b}}_k)$', fontsize=30)
+    plt.grid(True)
+
+    # ------------------------------------- plot for figure 3 ----------------------------------------------------------
+    # plt.plot(info_sgd['Wh_b_relation_metric'], 'r', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_adam['Wh_b_relation_metric'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_lbfgs['Wh_b_relation_metric'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    # ------------------------------------- plot for figure 6 ----------------------------------------------------------
+    plt.plot(info_ETFfc_false_fixdim_false['Wh_b_relation_metric'], 'c', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_false['Wh_b_relation_metric'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_false_fixdim_true['Wh_b_relation_metric'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_true['Wh_b_relation_metric'], 'r', marker='X', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel(r'$\mathcal{NC}_4$', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
 
-    fig.savefig(out_path + "bias_variance.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(-2, 8.01, 2), fontsize=30) # plot for figure 3 mnist
+    # plt.yticks(np.arange(-2, 8.1, 2), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(0, 3.01, 0.5), fontsize=30) # plot for figure 6 mnist
+    plt.yticks(np.arange(0, 8.01, 2), fontsize=30) # plot for figure 6 cifar10
+
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
+
+    # plt.axis([0, 200, 0, 8]) # plot for figure 3 mnist
+    # plt.axis([0, 200, -0.2, 8]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, 0, 3]) # plot for figure 6 mnist
+    plt.axis([0, 200, 0, 8]) # plot for figure 6 cifar10
+
+    fig.savefig(out_path + datasets[id] + "-resnet18-NC4.pdf", bbox_inches='tight')
 
 
-def plot_W_k(): # W 的 列norm 长度近似相等
-    W_list = info['W']
-    W_norm = []
-    for i in range(len(W_list)):
-        W_c = np.sqrt(np.sum(W_list[i]**2, axis=1))
-        W_norm.append(np.std(W_c) / np.mean(W_c))
-
+def plot_train_acc():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(W_norm, 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'${\rm{Std}}_c (\|\|{\bf w}_c\|\|_2) / {\rm{Avg}}_c (\|\|{\bf w}_c\|\|_2)$', fontsize=30)
+    plt.grid(True)
+
+    # ------------------------------------- plot for figure 3 ----------------------------------------------------------
+    # plt.plot(info_sgd['train_acc1'], 'r', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_lbfgs['train_acc1'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_adam['train_acc1'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    # ------------------------------------- plot for figure 6 ----------------------------------------------------------
+    plt.plot(info_ETFfc_false_fixdim_false['train_acc1'], 'c', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_false['train_acc1'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_false_fixdim_true['train_acc1'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_true['train_acc1'], 'r', marker='X', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel('Training accuracy', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
 
-    fig.savefig(out_path + "W.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(94, 101, 2), fontsize=30) # plot for figure 3 mnist
+    plt.yticks(np.arange(20, 110, 20), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(96, 101, 1), fontsize=30) # plot for figure 6 mnist
+    # plt.yticks(np.arange(40, 110, 20), fontsize=30) # plot for figure 6 cifar10
+
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
+
+    # plt.axis([0, 200, 94, 100.2]) # plot for figure 3 mnist
+    # plt.axis([0, 200, 40, 102]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, 96, 100.2]) # plot for figure 6 mnist
+    plt.axis([0, 200, 20, 102]) # plot for figure 6 cifar10
+
+    fig.savefig(out_path + datasets[id] + "-resnet18-train-acc.pdf", bbox_inches='tight')
 
 
-def plot_ETF1(): # W 的列vector 之间的夹角相同
-    W_list = info['W']
-    angle = []
-    for i in range(len(W_list)):
-        WWT = W_list[i] @ W_list[i].T
-        W_c = np.sqrt(np.sum(W_list[i] ** 2, axis=1))
-        div = np.outer(W_c, W_c)
-        cos = WWT / div
-        cos = cos - np.diagflat(np.diagonal(cos))
-        angle.append(np.std(cos.flatten()))
-
+def plot_test_acc():
     fig = plt.figure(figsize=(10, 8))
-    plt.plot(angle, 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'${\rm{Std}}_{c\neq c^\prime} (\cos_{\bf w}(c,c^\prime))$', fontsize=30)
+    plt.grid(True)
+
+    # ------------------------------------- plot for figure 3 ----------------------------------------------------------
+    # plt.plot(info_sgd['test_acc1'], 'r', marker='v',  ms=16,   markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_adam['test_acc1'], 'b', marker='o',  ms=16,  markevery=25, linewidth=5, alpha=0.7)
+    # plt.plot(info_lbfgs['test_acc1'], 'g', marker='s', ms=16,  markevery=25, linewidth=5, alpha=0.7)
+
+    # ------------------------------------- plot for figure 6 ----------------------------------------------------------
+    plt.plot(info_ETFfc_false_fixdim_false['test_acc1'], 'c', marker='v', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_false['test_acc1'], 'b', marker='o', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_false_fixdim_true['test_acc1'], 'g', marker='s', ms=16, markevery=25, linewidth=5, alpha=0.7)
+    plt.plot(info_ETFfc_true_fixdim_true['test_acc1'], 'r', marker='X', ms=16, markevery=25, linewidth=5, alpha=0.7)
+
+    plt.xlabel('Epoch', fontsize=40)
+    plt.ylabel('Testing accuracy', fontsize=40)
     plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
 
-    fig.savefig(out_path + "ETF_angle.pdf", bbox_inches='tight')
+    # plt.yticks(np.arange(94, 100.1, 2), fontsize=30) # plot for figure 3 mnist
+    # plt.yticks(np.arange(40, 100.1, 10), fontsize=30) # plot for figure 3 cifar10
+    # plt.yticks(np.arange(96, 100.1, 1), fontsize=30) # plot for figure 6 mnist
+    plt.yticks(np.arange(20, 100.1, 10), fontsize=30) # plot for figure 6 cifar10
 
+    # plt.legend(['SGD', 'Adam', 'LBFGS'], fontsize=30, loc=4) # plot for figure 3
+    # plt.legend(['learned classifier, d=512', 'fixed classifier, d=512', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30, loc=4) # plot for figure 6 mnist-restnet18, cifar10-resnet18
+    plt.legend(['learned classifier, d=2048', 'fixed classifier, d=2048', 'learned classifier, d=10', 'fixed classifier, d=10'], fontsize=30)  # plot for figure 6 cifar10-resnet50
 
-def plot_ETF2():
-    W_list = info['W']
-    val = []
-    for i in range(len(W_list)):
-        WWT = W_list[i] @ W_list[i].T
-        W_c = np.sqrt(np.sum(W_list[i] ** 2, axis=1))
-        div = np.outer(W_c, W_c)
-        cos = WWT / div
-        cos = cos - np.diagflat(np.diagonal(cos))
-        tmp = np.abs(cos + 1/9)
-        val.append(np.mean(tmp.flatten()))
+    # plt.axis([0, 200, 94, 100]) # plot for figure 3 mnist
+    # plt.axis([0, 200, 40, 100]) # plot for figure 3 cifar10
+    # plt.axis([0, 200, 96, 100]) # plot for figure 6 mnist
+    plt.axis([0, 200, 20, 100]) # plot for figure 6 cifar10
 
-    fig = plt.figure(figsize=(10, 8))
-    plt.plot(val, 'r', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.ylabel(r'${\rm{Avg}}_{c\neq c^\prime} \|\cos_{\bf w}(c,c^\prime)+1/(C-1)\|$', fontsize=30)
-    plt.xticks(XTICKS, fontsize=30)
-    plt.yticks(YTICKS, fontsize=30)
-    plt.axis(AXIS)
-
-    fig.savefig(out_path + "ETF_val.pdf", bbox_inches='tight')
-
-
-def plot_acc():
-    train_acc1 = info['train_acc1']
-    test_acc1 = info['test_acc1']
-
-    fig = plt.figure(figsize=(10, 8))
-    plt.plot(train_acc1, 'r', linewidth=6)
-    plt.plot(test_acc1, 'b', linewidth=6)
-    plt.xlabel('Epoch', fontsize=30)
-    plt.xticks(XTICKS, fontsize=30)
-    # plt.axis(AXIS)
-    # plt.axis([0, 210, 98, 100])
-    plt.legend(['training accuracy', 'testing accuracy'], fontsize=30)
-
-    fig.savefig(out_path + "acc.pdf", bbox_inches='tight')
+    fig.savefig(out_path + datasets[id] + "-resnet18-test-acc.pdf", bbox_inches='tight')
 
 
 def main():
-    plot_Sigma_W1()
-    plot_Sigma_W2()
-    plot_b_k_norm()
-    plot_b_k_variance()
-    plot_W_k()
-    plot_ETF1()
-    plot_ETF2()
-    plot_acc()
+    plot_collapse()
+    plot_ETF()
+    plot_WH_relation()
+    plot_residual()
 
+    # plot_train_test_acc()
+    plot_train_acc()
+    plot_test_acc()
 
 if __name__ == "__main__":
     main()
