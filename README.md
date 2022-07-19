@@ -95,7 +95,7 @@ $ python train_1st_order.py --gpu_id 0 --uid <saving directory name> --dataset <
 $ python train_1st_order.py --gpu_id 0 --uid <saving directory name> --dataset <mnist or cifar10> --optimizer SGD --lr 0.05 --SOTA
 ~~~
 ## Citation and reference 
-For technical details and full experimental results, please check [our paper](https://arxiv.org/abs/2105.02375).
+For technical details and full experimental results, please check [our paper](https://arxiv.org/pdf/2203.01238.pdf).
 ```
 @article{zhou2022optimization,
   title={On the Optimization Landscape of Neural Collapse under MSE Loss: Global Optimality with Unconstrained Features},
