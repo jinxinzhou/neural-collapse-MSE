@@ -2,6 +2,8 @@
 
 This is the code for the [paper](https://proceedings.mlr.press/v162/zhou22c.html) "On the Optimization Landscape of Neural Collapse under MSE Loss: Global Optimality with Unconstrained Features".
 
+International Conference on Machine Learning (ICML), 2022
+
 ## Introduction
 
 - We provide the first global optimization landscape analysis of *Neural Collapse* (NC) under mean-square-error (MSE) loss – an intriguing empirical phenomenon that arises in the last-layer classifiers and features of neural networks during the terminal phase of training. 
