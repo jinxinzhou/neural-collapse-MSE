@@ -97,12 +97,10 @@ $ python train_1st_order.py --gpu_id 0 --uid <saving directory name> --dataset <
 ## Citation and reference 
 For technical details and full experimental results, please check [our paper](https://arxiv.org/abs/2105.02375).
 ```
-@article{zhu2021geometric,
-      title={A Geometric Analysis of Neural Collapse with Unconstrained Features}, 
-      author={Zhihui Zhu and Tianyu Ding and Jinxin Zhou and Xiao Li and Chong You and Jeremias Sulam and Qing Qu},
-      year={2021},
-      eprint={2105.02375},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@article{zhou2022optimization,
+  title={On the Optimization Landscape of Neural Collapse under MSE Loss: Global Optimality with Unconstrained Features},
+  author={Zhou, Jinxin and Li, Xiao and Ding, Tianyu and You, Chong and Qu, Qing and Zhu, Zhihui},
+  journal={arXiv preprint arXiv:2203.01238},
+  year={2022}
 }
 ```
