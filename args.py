@@ -14,33 +14,40 @@ def parse_train_args():
     # Model Selection
     parser.add_argument('--model', type=str, default='resnet18')
     parser.add_argument('--no-bias', dest='bias', action='store_false')
+    parser.add_argument('--ETF_fc', dest='ETF_fc', action='store_true')
+    parser.add_argument('--fixdim', dest='fixdim', type=int, default=0)
+    parser.add_argument('--SOTA', dest='SOTA', action='store_true')
 
     # Hardware Setting
     parser.add_argument('--gpu_id', type=int, default=0)
+    parser.add_argument('--seed', type=int, default=6)
     parser.add_argument('--use_cudnn', type=bool, default=True)
 
     # Directory Setting
-    parser.add_argument('--dataset', type=str, choices=['mnist', 'cifar10'], default='mnist')
-    parser.add_argument('--data_dir', type=str, default='~/data')
+    parser.add_argument('--dataset', type=str, choices=['cifar10', 'mini_imagenet'], default='cifar10')
+    parser.add_argument('--data_dir', type=str, default='../data')
     parser.add_argument('--uid', type=str, default=None)
     parser.add_argument('--force', action='store_true', help='force to override the given uid')
 
     # Learning Options
     parser.add_argument('--epochs', type=int, default=200, help='Max Epochs')
     parser.add_argument('--batch_size', type=int, default=128, help='Batch size')
-    parser.add_argument('--loss', type=str, default='CrossEntropy', help='loss function configuration')
+    parser.add_argument('--loss', type=str, default='MSE', help='loss function configuration')
     parser.add_argument('--sample_size', type=int, default=None, help='sample size PER CLASS')
+    parser.add_argument('--M',type=float, default=1, help='length value for rescaled MSE')
+    parser.add_argument('--k', type=float, default=1, help='rescale value for rescaled MSE')
 
     # Optimization specifications
     parser.add_argument('--lr', type=float, default=0.1, help='learning rate')
-    parser.add_argument('--penalty', type=float, default=0.5, help='regularized weight for model parameters penalty')
     parser.add_argument('--patience', type=int, default=40, help='learning rate decay per N epochs')
     parser.add_argument('--decay_type', type=str, default='step', help='learning rate decay type')
-    parser.add_argument('--gamma', type=float, default=0.2, help='learning rate decay factor for step decay')
+    parser.add_argument('--gamma', type=float, default=0.1, help='learning rate decay factor for step decay')
     parser.add_argument('--optimizer', default='SGD', help='optimizer to use')
     parser.add_argument('--weight_decay', type=float, default=5e-4, help='weight decay')
-    parser.add_argument('--history_size', type=int, default=50, help='history size for LBFGS')
-    parser.add_argument('--ghost_batch', type=int, default=128, help='ghost size for LBFGS variants')
+
+    # The following two should be specified when testing adding wd on Features
+    parser.add_argument('--feature_decay_rate', type=float, default=1e-4, help='weight decay for last layer feature')
+    parser.add_argument('--history_size', type=int, default=10, help='history size for LBFGS')
 
     args = parser.parse_args()
 
@@ -95,13 +102,17 @@ def parse_eval_args():
     # Model Selection
     parser.add_argument('--model', type=str, default='resnet18')
     parser.add_argument('--no-bias', dest='bias', action='store_false')
+    parser.add_argument('--ETF_fc', dest='ETF_fc', action='store_true')
+    parser.add_argument('--fixdim', dest='fixdim', type=int, default=0)
+    parser.add_argument('--SOTA', dest='SOTA', action='store_true')
 
     # Hardware Setting
     parser.add_argument('--gpu_id', type=int, default=0)
+    parser.add_argument('--seed', type=int, default=6)
 
     # Directory Setting
-    parser.add_argument('--dataset', type=str, choices=['mnist', 'cifar10'], default='mnist')
-    parser.add_argument('--data_dir', type=str, default='~/data')
+    parser.add_argument('--dataset', type=str, choices=['cifar10', 'mini_imagenet'], default='cifar10')
+    parser.add_argument('--data_dir', type=str, default='../data')
     parser.add_argument('--load_path', type=str, default=None)
 
     # Learning Options
