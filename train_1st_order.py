@@ -1,12 +1,11 @@
 import sys
 
 import torch
-
+import torch.nn as nn
 import models
 from utils import *
 from args import parse_train_args
 from datasets import make_dataset
-
 
 def trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, logfile):
 
@@ -25,7 +24,9 @@ def trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler,
         if args.loss == 'CrossEntropy':
             loss = criterion(outputs[0], targets)
         elif args.loss == 'MSE':
-            loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device))
+            loss = criterion(outputs[0], nn.functional.one_hot(targets, num_classes=args.num_classes).type(torch.FloatTensor).to(args.device))
+        elif args.loss == 'RescaledMSE':
+            loss = criterion(outputs[0], targets)
 
         optimizer.zero_grad()
         loss.backward()
@@ -34,7 +35,7 @@ def trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler,
         # measure accuracy and record loss
         model.eval()
         outputs = model(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
@@ -46,14 +47,17 @@ def trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler,
     scheduler.step()
 
 
+
 def train(args, model, trainloader):
 
     criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
 
-    logfile = open('%s/log.txt' % (args.save_path), 'w')
+    logfile = open('%s/train_log.txt' % (args.save_path), 'w')
 
+    print_and_save('# of model parameters: ' + str(count_network_parameters(model)), logfile)
+    print_and_save('--------------------- Training -------------------------------', logfile)
     for epoch_id in range(args.epochs):
 
         trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, logfile)
@@ -65,16 +69,18 @@ def train(args, model, trainloader):
 def main():
     args = parse_train_args()
 
+    set_seed(manualSeed = args.seed)
+
     if args.optimizer == 'LBFGS':
         sys.exit('Support for training with 1st order methods!')
 
     device = torch.device("cuda:"+str(args.gpu_id) if torch.cuda.is_available() else "cpu")
     args.device = device
 
-    trainloader, _, num_classes = make_dataset(args.dataset, args.data_dir, args.batch_size, args.sample_size)
+    trainloader, _, num_classes = make_dataset(args.dataset, args.data_dir, args.batch_size, args.sample_size, SOTA=args.SOTA)
+    args.num_classes = num_classes
 
-    model = models.__dict__[args.model](num_classes=num_classes, fc_bias=args.bias).to(device)
-    print('# of model parameters: ' + str(count_network_parameters(model)))
+    model = models.__dict__[args.model](num_classes=num_classes, fc_bias=args.bias, ETF_fc=args.ETF_fc, fixdim=args.fixdim, SOTA=args.SOTA).to(device)
 
     train(args, model, trainloader)
 
