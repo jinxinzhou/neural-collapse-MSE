@@ -55,13 +55,34 @@ $ python validate_NC.py --gpu_id 0 --dataset <mnist or cifar10> --batch_size 256
 
 After training, by running the above command, we are able to calculate the four NC metrics defined in the paper. All the information of the NC metrics will be saved in an output file named `info.pkl`. 
 
-Finally, the evolutions of the NC metrics as well as the training/testing accuracy can be visualized by plotting them in figures:
+Finally, To reproduce the figures in the paper, 1
+
+1.The experiments of different optimization algorithms can be visualized by plotting them in figures:
 
 ~~~python
-$ python plot.py
+$ python plot_optim_mse.py
 ~~~
 
-**Note:** Please refer to `plot.py` for the details of plotting each figure in the paper.
+2.The experiment of fixing last-layer classifier can be visualized by plotting them in figures:
+
+~~~python
+$ python plot_etf_mse.py
+~~~
+
+3.The experiment of changing feature dimension can be visualized by plotting them in figures:
+
+~~~python
+$ python plot_dk_mse.py
+~~~
+
+4.The experiment of varying rescaled MSE parameters can be visualized by plotting them in figures:
+
+~~~python
+$ python plot_M_rmse.py
+$ python plot_k_rmse.py
+~~~
+
+**Note:** Please refer to one of them for the details of plotting each figure in the paper.
 
 ## Validating the unconstrained feature models for NC
 
