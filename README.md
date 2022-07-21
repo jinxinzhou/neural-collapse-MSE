@@ -56,7 +56,7 @@ $ python validate_NC.py --gpu_id 0 --dataset <mnist or cifar10> --batch_size 256
 After training, by running the above command, we are able to calculate the four NC metrics defined in the paper. All the information of the NC metrics will be saved in an output file named `info.pkl`. 
 
 ### Plot the figures in paper
-Finally, To reproduce the figures in the paper, 1
+Finally, the figures in the paper can be reproduced as following:
 
 1.The experiments of different optimization algorithms can be visualized by plotting them in figures:
 
